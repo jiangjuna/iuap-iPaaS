@@ -179,7 +179,7 @@ testali-mq-01为在阿里云上创建的对列名称。
 
 			public void handleMessage(String message){
 				//根据业务需要处理
-				System.out.println(   message );
+				System.out.println(message);
 				System.out.println(InvocationInfoProxy.getTenantid());
 			}
 		}
