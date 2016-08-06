@@ -52,10 +52,66 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 ** 1. 关于数据库的配置文件：eventcenter-application.properties **
 
-** 2. 关于MQ的配置文件:eventcenterConfig.properties, **
-支持通过环境变量传入路径的方式，key值是eventcenter-mqConfig-filePath，即eventcenter-mqConfig-filePath=配置文件路径。
+```
 
-** 注：每个环境的具体含义可参考模板配置文件中的注释。 **
+#jdbc.url的值是jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8
+jdbc.driverClassName=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8
+jdbc.username=
+jdbc.password=
+
+```
+
+** 2. 关于MQ的配置文件:eventcenterConfig.properties, **
+
+```
+
+#集群地址配置
+mq.address=172.20.14.133:5672
+
+#最大连接数
+mq.maxtotal=10
+
+#最大等待毫秒数
+mq.maxwait=5000
+
+#最大空闲连接
+mq.maxidle=-1
+
+#最小空闲连接
+mq.minidle=2
+
+#连接空闲的最小时间，达到此值后空闲连接将被移除
+mq.softminevictableidletimemillis=60000
+
+#每过这么多毫秒检查一次连接池中空闲的连接，把空闲时间超过minEvictableTimeMillis毫秒的连接断开，
+#直到连接池中的连接数到minIdle为止
+mq.timebetweenevictionrunsmillis=60000
+
+#用户名和密码，这两项需要配置，mq.username=admin，mq.password=admin
+mq.username=
+mq.password=
+
+#消息是否持久化
+mq.durable=true
+
+#监听队列的线程数，默认值为1
+#mq.customerNum=1
+
+#事件管理节点的服务地址(需要修改)
+event.manager.url=http://localhost:8080/event/eventmanager/eventinfo/index.do
+
+```
+
+其中，主要需要配置mq.address与event.manager.url，其它可以直接使用默认值
+
+- mq.address:RabbitmqMQ服务器地址，使用MQ集群时可以配置多个，以","隔开。
+	例如：mq.address=172.20.14.133:5672,172.20.14.134:5672
+
+- event.manager.url:当前事件中心服务地址，/eventmanager/eventinfo/index.do不需要修改，将http://localhost:8080/event修改为本地服务器的ip端口及事件中心部署的应用路径。
+
+
+** 支持通过环境变量传入路径的方式，key值是eventcenter-mqConfig-filePath，即eventcenter-mqConfig-filePath=配置文件路径。 **
 
 
 ##  事件中心注册说明
@@ -245,6 +301,8 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 （2）请求需要传入的参数：String sourceID，String eventType，String tenantCode），String data(事件的消息内容，建议为json格式)。
 
+**  注： 当不使用公共服务时，请将https://uas.yyuap.com/event/替换为实际部署的事件中心服务地址
+
 ** 2.进行加签：要调用我们的服务发送事件，需要进行加签，应用系统需要通过邮件向事件中心服务管理人员申请加签的密钥。**
 
 ** 3.加签算法参考示例工程，主要核心代码如下：**
@@ -376,7 +434,9 @@ http://localhost:8080/event/eventmanager/status.do.
 
 **请求方法**  
 
-https://uas.yyuap.com/event/eventmanager/sendEventMsg.do?appId=nodecode&ts=ts
+/eventmanager/sendEventMsg.do?appId=nodecode&ts=ts
+
+** 注：使用公网服务时，地址为  https://uas.yyuap.com/event/eventmanager/sendEventMsg.do?appId=nodecode&ts=ts **
 
 **请求方式**  
 
