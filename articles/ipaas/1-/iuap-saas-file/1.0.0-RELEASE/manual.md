@@ -31,7 +31,7 @@ ${iuap.saas.modules.version} 为平台在maven私服上发布的组件的version
 
 
 ## 调用流程 ##
-<img src="/images/file_structure.jpg"/>
+![](./images/file_structure.jpg)
 
 组件封装了三种文件系统，并暴露出了常用的文件操作接口，用户通过这些接口，去操作组件所管理的对应文件系统。
 
@@ -149,9 +149,6 @@ example测试类
 	@WebServlet(asyncSupported = true,name = "Oss",urlPatterns = { "/oss" })
 	public class OssDirectServlet extends SaasCallbackServer {
 		
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = 1L;
 	
 		protected void doPost(HttpServletRequest request, HttpServletResponse response)
