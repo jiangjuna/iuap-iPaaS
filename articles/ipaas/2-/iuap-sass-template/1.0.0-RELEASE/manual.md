@@ -413,39 +413,74 @@ uitemplate.properties模板配置文件，参数如下：
         <td>通过initTemplateComponent方法，设置templateComponentName、nexuskey、funcnode参数获取模板，生成静态文件，加载绑定到对应的div区域</td>
     </tr>
 </table>
-开发相关html，引入相关的css文件，在html中定义一个div，设置id区域以供模板加载，在相关节点(最好是在同级目录下添加文件，如uitemplate/controller.js)业务控制类controller.js处理业务逻辑controller.js可回调业务的方法;
+
+
+
+人节点需要开发节点html，引入模板的css、js等第三方文件；在节点html中定义一个div，设置id区域以供模板加载，在相关节点(最好是在同级目录下添加文件，如uitemplate/controller.js)业务控制类controller.js处理业务逻辑controller.js可回调业务的方法;
+人员节点前端结构：
 
 <table>
     <tr>
-        <th>回调方法</th>
-        <th>说明</th>
+        <th>结构</th>
+        <th width="140px">说明</th>
+        <th>备注</th>
     </tr>
     <tr>
-        <td>extendViewModel</td>
-        <td>扩展viewModel模型</td>
+        <td>index.html</td>
+        <td>开发节点页面</td>
+        <td>引入bootstrap.min.css，u.css，u-extend.css，tree.css，ref.css，index.css等样式文件，引入require.js，index.js脚本,。其中设置一个div区域，设置id加载模板静态文件</td>
     </tr>
     <tr>
-        <td>beforeInit</td>
-        <td>数据加载前初始化业务逻辑</td>
+        <td>index.js</td>
+        <td>开发节点js文件</td>
+        <td>引入jquery.js，konckout.js，u-polyfillte.js，u.js，bootstrap.js，tmplateutil等文件，实例化TempletUtils，调用方法initTemplateComponent，设置参数值templateComponentName(div区域id)、nexuskey、funcnode，uitemplateCtrl(controller.js的url)</td>
     </tr>
     <tr>
-        <td>init</td>
-        <td>回调业务的viewModel的扩展</td>
+        <td>index.css</td>
+        <td>开发节点css样式</td>
+        <td>针对节点扩展设置样式</td>
     </tr>
     <tr>
-        <td>afterInit</td>
-        <td>业务数据初始化回调，主要处理数据加载，可调用templateModel.js中的init加载数据</td>
-    </tr>
-    <tr>
-        <td>valchange</td>
-        <td>业务数据回调处理，监听数据变化，计算金额合计</td>
-    </tr>
-    <tr>
-        <td>其它相关操作</td>
-        <td>add(新增)、del(删除)、edit(编辑)、headEdit(表头编辑)、save(保存)、cancel(取消)、rowEdit(子表行编辑)、rowDelete(子表行删除)相关业务回调</td>
+        <td>controller.js</td>
+        <td>业务扩展js</td>
+        <td>新建一个与index.html平级的uitemplate的目录，将controller.js放在uitemplate下</td>
     </tr>
 </table>
-加载模板，将生成的静态页面加载到相关的div区域，运行态效果如下图所示
+controller.js可回调业务的方法
+
+<table>
+  <tr>
+      <th>回调方法</th>
+      <th>说明</th>
+  </tr>
+  <tr>
+      <td>extendViewModel</td>
+      <td>扩展viewModel模型</td>
+  </tr>
+  <tr>
+      <td>beforeInit</td>
+      <td>数据加载前初始化业务逻辑</td>
+  </tr>
+  <tr>
+      <td>init</td>
+      <td>回调业务的viewModel的扩展</td>
+  </tr>
+  <tr>
+      <td>afterInit</td>
+      <td>业务数据初始化回调，主要处理数据加载，可调用templateModel.js中的init加载数据，根据datatableid和entityid，获取form中的form_before_picture和form_after_picture区域绘制曲线图</td>
+  </tr>
+  <tr>
+      <td>valchange</td>
+      <td>业务数据回调处理，监听数据变化，计算金额合计</td>
+  </tr>
+  <tr>
+      <td>其它相关操作</td>
+      <td>add(新增)、del(删除)、edit(编辑)、headEdit(表头编辑)、save(保存)、cancel(取消)、rowEdit(子表行编辑)、rowDelete(子表行删除)相关业务回调</td>
+  </tr>
+</table>
+
+
+index.js中调用initTemplateComponent方法加载模板，将生成的静态页面加载到相关的div区域，运行态效果如下图所示：
 
 ![Alt text](./images/rt.png)
 
