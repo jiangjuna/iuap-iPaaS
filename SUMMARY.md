@@ -10,6 +10,7 @@
    * [对象OID组件](articles/ipaas/1-/iuap-saas-oid/1.0.0-RELEASE/manual.md)
    * [搜索组件](articles/ipaas/1-/iuap-saas-search/1.0.0-RELEASE/manual.md)
 * [应用支撑组件SaaS版](articles/ipaas/2-/README.md)
+   * [saas应用支撑组件说明](articles/ipaas/2-/iuap-sass/1.0.0-RELEASE/manual.md)
    * [后台调度任务](articles/ipaas/2-/iuap-saas-dispatch-service/1.0.0-RELEASE/manual.md)
    * [附件管理](articles/ipaas/2-/iuap-saas-filesystem-service/1.0.0-RELEASE/manual.md)
    * [事件中心sdk](articles/ipaas/2-/iuap-sass-event-sdk/1.0.0-RELEASE/manual.md)
