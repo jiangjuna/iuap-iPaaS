@@ -15,3 +15,4 @@
    * [事件中心sdk](articles/ipaas/2-/iuap-sass-event-sdk/1.0.0-RELEASE/manual.md)
    * [事件中心](articles/ipaas/2-/iuap-sass-event-service/1.0.0-RELEASE/manual.md)
    * [参照组件](articles/ipaas/2-/iuap-sass-reference/1.0.0-RELEASE/manual.md)
+   * [ui模板组件](articles/ipaas/2-/iuap-sass-template/1.0.0-RELEASE/manual.md)
