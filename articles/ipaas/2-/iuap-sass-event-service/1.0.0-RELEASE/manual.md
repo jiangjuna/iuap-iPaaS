@@ -299,13 +299,34 @@ event.manager.url=http://localhost:8080/event/eventmanager/eventinfo/index.do
 
 （1）请求地址：https://uas.yyuap.com/event/eventmanager/sendEventMsg.do
 
-（2）请求需要传入的参数：String sourceID，String eventType，String tenantCode），String data(事件的消息内容，建议为json格式)。
+（2）请求需要传入的参数：String sourceID，String eventType，String tenantCode，String userObject(事件的消息内容，建议为json格式)。
 
 **  注： 当不使用公共服务时，请将https://uas.yyuap.com/event/替换为实际部署的事件中心服务地址
 
 ** 2.进行加签：要调用我们的服务发送事件，需要进行加签，应用系统需要通过邮件向事件中心服务管理人员申请加签的密钥。**
 
-** 3.加签算法参考示例工程，主要核心代码如下：**
+加签时需要配置以下文件：application.properties和authfile.txt，具体参考示例工程。
+
+** application.properties文件中增加如下配置项：**
+
+```
+
+bpm.client.credential.path=D:/etc/authfile.txt
+
+```
+
+** 其中authfile.txt文件配置说明如下： **
+
+```
+
+appId=3c8242c9467d059f9b718a890c9932ca
+key=test
+
+```
+
+key配置为事件中心提供的密钥，appId配置为应用系统在事件中心应用注册中的应用编码，注意此处于加签算法中的服务调用参数appid的值应保持一致。上述两个参数为通过邮件向事件中心管理人员申请注册时，由事件中心提供。需要与事件中心的应用注册表中的数据相同。
+
+** 3.具体的加签算法，请参考示例工程，主要核心代码如下：**
 
 ```
 
@@ -377,6 +398,7 @@ public class SenderSign {
 }
 
 ```
+
 
 #### 业务系统监听事件实现
 
