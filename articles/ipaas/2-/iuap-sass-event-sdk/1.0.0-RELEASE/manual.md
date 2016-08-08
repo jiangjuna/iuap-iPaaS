@@ -284,6 +284,8 @@ event.manager.url=http://uas.yyuap.com/event/eventmanager/eventinfo/index.do
 
 在应用服务启动时调用EventDispatcher.startListener()，启动事件监听线程，如果只发送事件可以不用启动该服务。
 
+参考示例系统 com.yonyou.iuap.event.test.StartListenerUtil，在web.xml中配置在中间件启动时启动。
+
 ** 2.监听类实现IBussinessListener **
 
 ```
@@ -319,7 +321,7 @@ com.yonyou.iuap.event.test.UserPluginImpl
 
 ```
 
-INSERT INTO pub_event_node (node_code, node_name, note, last_time, version) VALUES ('<b>ANONYMOUS_CLUSTER</b>', '测试节点', null, '2016-03-02 18:18:23', 1);
+INSERT INTO pub_event_node (node_code, node_name, note, last_time, version) VALUES ('ANONYMOUS_CLUSTER', '测试节点', null, '2016-03-02 18:18:23', 1);
 
 ```
 
@@ -327,7 +329,7 @@ INSERT INTO pub_event_node (node_code, node_name, note, last_time, version) VALU
 
 ```
 
-INSERT INTO pub_eventtype (id, sourceid, sourcename, sourcenamei18n, eventtypecode, eventtypename, eventtypenamei18n, owner, note, last_time, version) VALUES (1, '<b>USER</b>', '用户', 'USER', '<b>ADD_AFTER</b>', '新增后', 'ADD_AFTER', 'ALL', null, null, 1);
+INSERT INTO pub_eventtype (id, sourceid, sourcename, sourcenamei18n, eventtypecode, eventtypename, eventtypenamei18n, owner, note, last_time, version) VALUES (1, 'USER', '用户', 'USER', 'ADD_AFTER', '新增后', 'ADD_AFTER', 'ALL', null, null, 1);
 
 ```
 
@@ -335,7 +337,7 @@ INSERT INTO pub_eventtype (id, sourceid, sourcename, sourcenamei18n, eventtypeco
 
 ```
 
-INSERT INTO pub_eventlistener (id, event_type_id, name, namei18n, implclassname, owner, note, operindex, node_code, enabled, last_time, version) VALUES (1, 1, '测试用户新增', 'testUserAdd', '<b>com.yonyou.iuap.event.test.UserPluginImpl</b>', 'ALL', null, 1, '<b>ANONYMOUS_CLUSTER</b>', 'Y', null, 1);
+INSERT INTO pub_eventlistener (id, event_type_id, name, namei18n, implclassname, owner, note, operindex, node_code, enabled, last_time, version) VALUES (1, 1, '测试用户新增', 'testUserAdd', 'com.yonyou.iuap.event.test.UserPluginImpl', 'ALL', null, 1, 'ANONYMOUS_CLUSTER', 'Y', null, 1);
 
 ```
 

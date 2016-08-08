@@ -53,9 +53,10 @@ ${iuap.modules.version} 为平台在maven私服上发布的组件的version。
 
 ##组件配置##
 
-** 1:数据库配置 **
+** 1:数据库配置 参考dispatch_dbinfo.properties**
 
 ```
+
 jdbc.driver=com.mysql.jdbc.Driver
 jdbc.url=jdbc:mysql://localhost:3306/ec?useUnicode=true&characterEncoding=utf-8
 jdbc.catalog=ec
@@ -84,16 +85,37 @@ jdbc.pool.testWhileIdle=true
 jdbc.pool.timeBetweenEvictionRunsMillis=30000
 jdbc.pool.numTestsPerEvictionRun=-1
 
-#动态dynamicDataSource   默认数据源jdbcDataSource
+#动态dynamicDataSource   默认数据源dataSource
 filejdbcDataSource=dynamicDataSource
 
+
 ```
-** 注意，要使用动态数据源特性 ** ，需要设置filejdbcDataSource=dynamicDataSource，否则要设置为filejdbcDataSource=jdbcDataSource
 
-** 2:与云工作台同时使用时，请在工作台的数据库中执行下面脚本 **
+** 注意，要使用动态数据源特性 ** ，需要设置filejdbcDataSource=dynamicDataSource，否则要设置为filejdbcDataSource=dataSource
 
-** 3:其它请参考后台任务组件的配置说明 **
+** 2:认证组件相关配置 参考dispatch_dbinfo.properties**
 
+```
+
+	redis.session.url=direct://ip:6379?poolSize=50&poolName=
+	poolSize=50&poolName=&password=
+	sessionTimeout=3600
+	sessionMutex=false
+	context.name=/
+	sysid=
+
+```
+
+** 3:与云工作台同时使用时，请在工作台的数据库中执行下面脚本 **
+
+ INSERT INTO wb_app_apps (Id, app_name, app_index, group_id, domain_id, url, app_chinese, app_desc, app_icon, app_groupcode, app_code, dyna_url, tenant_id, urltype, version, system, label) VALUES ('d64f3f3490f24a80b07cb618290743ae', '后台调度', null, '2', '274833475802f3ccc5a75cedcac6f239', '/iuap-saas-dispatch-service/', null, 'serverindex', 'icon-C-photo', null, 'serverindex', null, '租户编码', 'url', 6, '应用ID', null);
+
+注意： '租户编码'，'应用ID' 要改成实际环境的值
+
+
+** 4:其它请参考后台任务组件的配置说明 **
+
+** 注：dispatch_dbinfo.properties配置文件参数也支持通过系统变量和环境变量传入**
 
 ## 示例工程说明：##
 
